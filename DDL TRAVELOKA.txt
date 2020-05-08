@@ -1,0 +1,70 @@
+CREATE TABLE Penumpang
+(
+    emailPenumpang VARCHAR(30),
+    noHP VARCHAR(15),
+    namaPenumpang VARCHAR(30),
+    Profile_Image BLOB,
+    passPenumpang VARCHAR(20),
+    CONSTRAINT Penumpang_PK PRIMARY KEY (emailPenumpang) ENABLE
+);
+CREATE TABLE Flight
+(
+    Flight_Code VARCHAR(10),
+    Kota_Asal VARCHAR(20),
+    Kota_Tujuan VARCHAR(20),
+    Tanggal_Berangkat DATE,
+    Jumlah_Penumpang INTEGER,
+    Jenis_Tiket VARCHAR (20),
+    Durasi_Penerbangan TIMESTAMP WITH TIME ZONE,
+    CONSTRAINT Flight_PK PRIMARY KEY (Flight_Code) ENABLE
+);
+CREATE TABLE Search_n_Select
+(
+    chosen_id VARCHAR (255),
+    emailPenumpang VARCHAR(30),
+    Flight_Code VARCHAR(10),
+    CONSTRAINT Search_n_Select_PK PRIMARY KEY (chosen_id) ENABLE,
+    CONSTRAINT Search_n_Select_FK1 FOREIGN KEY (emailPenumpang) REFERENCES penumpang (emailPenumpang),
+    CONSTRAINT Search_n_Select_FK2 FOREIGN KEY (Flight_Code) REFERENCES flight (Flight_Code)
+);
+CREATE TABLE Booking_Details
+(
+    Booking_ID VARCHAR (255),
+    Full_Name VARCHAR (255),
+    Passenger_Email VARCHAR (255),
+    Passenger_HP VARCHAR (255),
+    Deparature_Date DATE,
+    Baggage_Facilities INTEGER,
+    Insurance_Option CHAR(1),
+    Ticket_Price INTEGER,
+    chosen_id VARCHAR (255),
+    CONSTRAINT Booking_Details_PK PRIMARY KEY (Booking_ID) ENABLE,
+    CONSTRAINT Booking_Details_FK1 FOREIGN KEY (chosen_id) REFERENCES Search_n_Select (chosen_id)
+);
+
+CREATE TABLE Payment
+(
+    Payment_Code VARCHAR(255) NOT NULL,
+    Payment_Deadline TIMESTAMP WITH TIME ZONE,
+    Payment_Method VARCHAR2(255),
+    Admin_Fee INTEGER,
+    Total_Paid INTEGER,
+    Booking_ID VARCHAR2(255),
+    Booking_Code VARCHAR2(15),
+    CONSTRAINT Payment_PK PRIMARY KEY (Payment_Code) ENABLE,
+    CONSTRAINT Payment_FK1 FOREIGN KEY (Booking_ID) REFERENCES Booking_Details (Booking_ID),
+    CONSTRAINT Payment_FK2 FOREIGN KEY (Booking_Code) REFERENCES e_Ticket (Booking_Code)
+);
+
+CREATE TABLE e_Ticket
+(
+    Booking_Code VARCHAR(15),
+    Nama_Penumpang VARCHAR(30),
+    Jenis_Tiket VARCHAR(10),
+    Bagasi_Penumpang INTEGER,
+    Durasi_Penerbangan TIMESTAMP WITH TIME ZONE,
+    Rute_Penerbangan VARCHAR(30),
+    Airlines_Name VARCHAR(30),
+    CONSTRAINT e_Ticket_PK PRIMARY KEY (Booking_Code) ENABLE
+);
+

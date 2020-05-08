@@ -1,0 +1,13 @@
+
+alter session set nls_date_format= 'dd-month-yyyy';
+INSERT INTO PENUMPANG VALUES('andika@gmail.com','082235467890','Andika',null,'gatau');
+
+INSERT INTO FLIGHT VALUES('001','BDO','DPS','20-December-2018',1,'FIRST','20-December-2018 10:23:54AM+07');
+
+INSERT INTO SEARCH_N_SELECT VALUES('01','andika@gmail.com','001');
+
+INSERT INTO BOOKING_DETAILS VALUES('001','I Gede Andika Yudantara','andika@gmail.com','082235467890','20-December-2018','20','N','5000000','01');
+
+INSERT INTO E_TICKET VALUES ('0001','Andika','First',20,'20-December-2018 10:23:54AM+07','BDO-DPS','GARUDA INDONESIA');
+
+INSERT INTO PAYMENT VALUES('001','2-December-2018 10:23:54AM+07','Mobile Banking',1000000,6000000,'001','0001');
